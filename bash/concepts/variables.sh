@@ -34,9 +34,19 @@ echo "The variable created inside a subshell is (nothing): ${var_inside_parenthe
 var=$(pwd)
 echo "Calling \$(pwd) command returned: $var"
 
-# Enclosing commands whit double parenthesis (( )) allows to make C like math operations.
+# Enclosing commands with double parenthesis (( )) allows to make C like math operations.
 # Variables inside a (( )) don't need to be referenced with a dollar sign $.
 # Anything that it's not a number will be equal to "0".
 var="5"
 (( var = var + 10 ))
 echo $((var + 10))
+
+# The AND operator && will execute the second command only if the first command
+# returns "0"
+bad_command &>/dev/null && echo "Not printing, first command doesn't exist"
+pwd &>/dev/null && echo "Hello from AND"
+
+# The OR operator || will execute the second command only if the first command
+# doesn't return "0"
+pwd &>/dev/null || echo "Not printing, first one returns 0"
+bad_command &>/dev/null || echo "Hello from OR"

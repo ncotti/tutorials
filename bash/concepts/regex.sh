@@ -31,3 +31,11 @@ fi
 if echo "123" | grep -P $regex &>/dev/null; then
     echo "Using Perl regex engine, digits are detected!"
 fi
+
+# A simple substitution algorithm can be made with shell parameter expansion.
+# The syntax is: ${variable/pattern_to_search/pattern_to_replace}
+# Use one "/" to replace the first occurrence, double "//" for all occurrences.
+var="Hello world"
+echo "Let's replace the first ocurrence of the letter \"L\" in hello world \
+with \"K\": ${var/l/K}"
+echo "Now, all the \"L\": ${var//l/K}"

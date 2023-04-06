@@ -206,3 +206,9 @@ You can aswell use a `printf` just like the C function to print nicer outputs.
 ```
 
 And example script can be found in `script.gdb`.
+
+## Bibliography
+
+* [gdb QuickStart](https://web.eecs.umich.edu/~sugih/pointers/gdbQS.html#:~:text=If%20you%20want%20gdb%20to,or%20gdb%20encounters%20a%20breakpoint.).
+
+* [GDB: The GNU Project Debugger](https://www.sourceware.org/gdb/documentation/).

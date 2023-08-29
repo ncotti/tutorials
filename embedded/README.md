@@ -1,4 +1,8 @@
-## General data
+# Bare metal embedding
+
+## Theoretical background
+
+### Some definitions
 
 A platform or "target" is represented with a three component string, separated with dashes:
 
@@ -26,9 +30,23 @@ software program.
 
 [A comprenhensive list of platform targets](https://doc.rust-lang.org/nightly/rustc/platform-support.html).
 
+### Memory map
+
+When a program is flashed into an embedded device, its stored in the ROM (Read Only Memory). However, the program is not able to be run normally from the ROM because, for example, variables can't be freely modified and its considerably slower to execute code from there compared to the RAM (Random Access Memory).
+
+The **bootloader** is a special code, written in Assembly and executed from the ROM, which should handle all the following steps before executing the main program:
+
+* Copy all code (.text) and data (.rodata, .data, .bss, .COMMON, etc) from the ROM into the RAM.
+
+* Copy the vector table into the correct place.
+
+* Initialize all hardware dependant registers.
+
+![Simplified memory map, showing start of flash memory, MSP location and reset handler.](../media/memory_map.png)
+
 ## What's needed to flash a program
 
-![All required elements to flash a program to an embedded device](../media/flash_arm.png)
+![All required elements to compile and flash a program to an embedded device](../media/flash_arm.png)
 
 * The **Compiler** and **Assembler** interpret the "C" and "Assembly" code and parse it to machine code, generating the ".o" object files.
 
@@ -44,7 +62,8 @@ The ".elf" extension (Executable Linkable Format) has all the binary data plus h
 
 objcopy -O binary main.elf main.bin converts the file to binary format.
 
-![Simplified memory map, showing start of flash memory, MSP location and reset handler.](../media/memory_map.png)
+
+NOTE: agregar archivo openocd en /etc/udev/rules.d
 
 ## Minimal
 
